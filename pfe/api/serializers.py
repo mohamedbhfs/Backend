@@ -55,6 +55,8 @@ class VisiteMarchandiseur(serializers.ModelSerializer):
           fields = '__all__'
 
 
+
+
     
 
 

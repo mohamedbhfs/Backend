@@ -15,7 +15,13 @@ Etatchoice=[
     ('Prevu','Prevu'),
     ('En cours','En cours'),
     ('Termine','Termine'),
+    ('Rapport en attente', 'Rapport en attente'),
     ('Non Effectue','Non Effectue')
+]
+ReponseChoice=[
+    ('Number','Number'),
+    ('Boolean','Boolean'),
+    ('Text','Text'),
 ]
 
 # Create your models here.
@@ -25,8 +31,6 @@ class Employe(models.Model):
     Date_Naissance=models.DateField()
     Adresse=models.TextField()
     Poste=models.CharField(max_length=30,choices=Postechoice)
-    Employe_non_Conforme=models.CharField(max_length=5,choices=True_false_choices)
-    Employe_Suspendu=models.CharField(max_length=5,choices=True_false_choices)
     Nom_utilisateur=models.CharField(max_length=30,unique=True,null=True)
     Mote_passe=models.CharField(max_length=30,null=True)
 
@@ -39,8 +43,10 @@ class Formulaire(models.Model):
     Version=models.IntegerField(primary_key=True)
 
 class Case(models.Model):
-    Information=models.TextField()
+    Question=models.TextField(null=True)
     Id_formulaire=models.ForeignKey(Formulaire,on_delete=models.CASCADE)
+    Type_reponse=models.TextField(choices=ReponseChoice,null=True)
+
 
 class Visite(models.Model):
     Nom=models.CharField(max_length=30)
@@ -48,12 +54,12 @@ class Visite(models.Model):
     Etat=models.CharField(max_length=20,choices=Etatchoice)
     Temp_arv_est_pos=models.TimeField(null=True)
     Temp_arv_reel_pos=models.TimeField(null=True)
-    Problem=models.TextField(null=True)
+    Problemes=models.TextField(null=True)
+    Infomationssupplementaires=models.TextField(null=True)
     Arrive=models.CharField(max_length=5,choices=True_false_choices,null=True)
     Id_pos=models.ForeignKey(Point_vente,on_delete=models.CASCADE)
     Id_employe=models.ForeignKey(Employe,on_delete=models.CASCADE)
     Id_formulaire=models.ForeignKey(Formulaire,on_delete=models.CASCADE)
-
 
 class Position(models.Model):
     Adresse=models.TextField()

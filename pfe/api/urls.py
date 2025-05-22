@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import Marchandiseurlistcreateapi,Marchandiseurretrieve,PointVentelistcreateapi,PointVenteretrieve,Formulairelistcreateapi,Formularieretrieve,Visitelistcreateapi,Visiteretrieve,Filtervisite,VisiteMarchandiseurlistapi,Filterpointvente,testsend
+from .views import Marchandiseurlistcreateapi,Marchandiseurretrieve,RepenseCaselistcreateapi,RepenseCaseretrieve,PointVentelistcreateapi,PointVenteretrieve,Formulairelistcreateapi,Formularieretrieve,Visitelistcreateapi,Visiteretrieve,Filtervisite,VisiteMarchandiseurlistapi,Filterpointvente,FilterRapportEnable,Formularieretrieve,FilterCases,Caselistcreateapi
 urlpatterns =[
     path('listaddmarchandiseur/',Marchandiseurlistcreateapi.as_view()),
     path('marchandiseur/<int:pk>',Marchandiseurretrieve.as_view()),
@@ -11,7 +11,9 @@ urlpatterns =[
     path ('filterpointvente/',Filterpointvente.as_view()),
     path('Pointvente/<int:pk>/',PointVenteretrieve.as_view()),
     path('listaddpointvente/',PointVentelistcreateapi.as_view()),
-    path('test/',testsend),
-
+    path('filterRapportEnable/',FilterRapportEnable.as_view()),
+    path('filtercase/',FilterCases.as_view()),
+    path('listaddcase/',Caselistcreateapi.as_view()),
+    path('listaddrepensecase/',RepenseCaselistcreateapi.as_view()),
 
 ]

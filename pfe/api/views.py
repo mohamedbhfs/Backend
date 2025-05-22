@@ -149,9 +149,21 @@ class  Filterpointvente(generics.ListAPIView):
         nom_pos = self.request.query_params.get('nom_pos') or ""
         queryset=Point_vente.objects.filter(Nom__icontains=nom_pos)
         return queryset
-def testsend(request):
-    VerifieVisite.delay()
-    return HttpResponse("Tâche envoyée avec succès.")
+class  FilterRapportEnable(generics.ListAPIView):
+        serializer_class = VisiteMarchandiseur
+        def get_queryset(self):
+            id_March_Super = self.request.query_params.get('id')
+            queryset=Visite.objects.filter(Id_employe=id_March_Super,Etat='Rapport en attente')
+            return queryset
+class FilterCases(generics.ListAPIView):
+    serializer_class=CaseSerializer
+    def get_queryset(self):
+        Id_formulaire = self.request.query_params.get('Id_formulaire')
+        queryset =Case.objects.filter(Id_formulaire=Id_formulaire)
+        return queryset
+        
+
+
 
 
 
